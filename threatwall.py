@@ -305,14 +305,14 @@ class IoC_Block:
 					if skip_in:
 						logging.debug("Skipping input block of "+URL+" as a result of an exisiting block")
 					else:
-						blocklist.add(' '.join(["-A","INPUT","-p","tcp","--match","multiport","'!'","--sports","'443,8443,6697'","-m","string","--algo","bm","--string",URL,"-j","THREATWALL","-m","comment","--comment",'"Placed by threatwall for inbound TCP URL IoC"']))
-						blocklist.add(' '.join(["-A","INPUT","-p","udp","--match","multiport","'!'","--sports","'443,8443,6697'","-m","string","--algo","bm","--string",URL,"-j","THREATWALL","-m","comment","--comment",'"Placed by threatwall for inbound UDP URL IoC"']))
+						blocklist.add(' '.join(["-A","INPUT","-p","tcp","--match","multiport","!","--sports","443,8443,6697","-m","string","--algo","bm","--string",URL,"-j","THREATWALL","-m","comment","--comment",'"Placed by threatwall for inbound TCP URL IoC"']))
+						blocklist.add(' '.join(["-A","INPUT","-p","udp","--match","multiport","!","--sports","443,8443,6697","-m","string","--algo","bm","--string",URL,"-j","THREATWALL","-m","comment","--comment",'"Placed by threatwall for inbound UDP URL IoC"']))
 					
 					if skip_out:
 						logging.debug("Skipping output block of "+URL+" as a result of an exisiting block")
 					else:	
-						blocklist.add(' '.join(["-A","OUTPUT","-p","tcp","--match","multiport","'!'","--dports","'443,8443,6697'","-m","string","--algo","bm","--string",URL,"-j","THREATWALL","-m","comment","--comment",'"Placed by threatwall for outbound TCP URL IoC"']))
-						blocklist.add(' '.join(["-A","OUTPUT","-p","udp","--match","multiport","'!'","--dports","'443,8443,6697'","-m","string","--algo","bm","--string",URL,"-j","THREATWALL","-m","comment","--comment",'"Placed by threatwall for outbound UDP URL IoC"']))
+						blocklist.add(' '.join(["-A","OUTPUT","-p","tcp","--match","multiport","!","--dports","443,8443,6697","-m","string","--algo","bm","--string",URL,"-j","THREATWALL","-m","comment","--comment",'"Placed by threatwall for outbound TCP URL IoC"']))
+						blocklist.add(' '.join(["-A","OUTPUT","-p","udp","--match","multiport","!","--dports","443,8443,6697","-m","string","--algo","bm","--string",URL,"-j","THREATWALL","-m","comment","--comment",'"Placed by threatwall for outbound UDP URL IoC"']))
 				else:
 					print("Skipping "+URL+" due to a whitelist entry.")		
 					logging.info("Skipping "+URL+" due to a whitelist entry.")

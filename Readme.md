@@ -17,10 +17,11 @@
  
  This is designed for a low-impact system that can afford to block something like 'google.com' by accident yet contains important data.
  
- While planned for the future, there is no 'whitelist' incorporated into this program.
- 
+ That being said, it does support whitelists for each type of indicator (e.g.: whitelist.IPv4), use this feature to whitelist all important IP addresses,URLs,domains,etc... 
+  
  These considerations change if you maintain your own repository with all your important sites whitelisted(filtered out),
  which would mean only potentially malicious indicators will be blocked.
+ 
  
  
 # Usage
