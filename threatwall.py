@@ -139,8 +139,8 @@ class IoC_Block:
 				print("Error applying IPv4 blocks via iptables-restore")
 				logging.error("Error applying IPv4 blocks via iptables-restore")
 			os.remove(tmp_path)
-			print("Finished processing IPv4 blocks.")
-			logging.info("Finished processing IPv4 blocks.")	
+			print("Finished processing IPv4 blocks. "+str(len(blocklist))+" Blocks applied")
+			logging.info("Finished processing IPv4 blocks. "+str(len(blocklist))+" Blocks applied")	
 		except Exception as e:
 			logging.exception("Error applying IPv4 blocks")	
 			return 
@@ -231,8 +231,8 @@ class IoC_Block:
 				logging.error("Error applying domain blocks via iptables-restore")
 
 			os.remove(tmp_path)
-			print("Finished processing domain blocks.")
-			logging.info("Finished processing domain blocks.")			
+			print("Finished processing domain blocks. "+str(len(blocklist))+" Blocks applied")
+			logging.info("Finished processing domain blocks. "+str(len(blocklist))+" Blocks applied")			
 		except Exception as e:
 			logging.exception("Error applying domain blocks")	
 			return 
@@ -334,9 +334,9 @@ class IoC_Block:
 				print("Error applying URL blocks via iptables-restore")
 				logging.error("Error applying URL blocks via iptables-restore")
 
-			#os.remove(tmp_path)
-			print("Finished processing URL blocks.")
-			logging.info("Finished processing URL blocks.")			
+			os.remove(tmp_path)
+			print("Finished processing URL blocks. "+str(len(blocklist))+" Blocks applied")
+			logging.info("Finished processing URL blocks. "+str(len(blocklist))+" Blocks applied")			
 		except Exception as e:
 			logging.exception("Error applying URL blocks")	
 			return 
@@ -389,7 +389,7 @@ class Fetch:
 			logging.exception("Error while syncing  git repository for indicators")
 			
 def usage():
-	print "Usage: python2 ",os.path.basename(__file__)," [-vhBSlTtcrfoi] ",('''
+	print("Usage: python2 ",os.path.basename(__file__)," [-vhBSlTtcrfoi] ",('''
 		-i	<DROP|ACCEPT|REJECT,..> INPUT chain policy
 		-o  <DROP|ACCEPT|REJECT,..> OUTPUT chain policy
 		-f  <DROP|ACCEPT|REJECT,..> FORWARD chain policy
@@ -401,7 +401,7 @@ def usage():
 		-S  <secs> Interval in seconds between syncing of the remote git repository
 		-B  Run in background (Foreground is default)
 		-v  Print this applications current version string
-		-h  Display this usage instruction.''')
+		-h  Display this usage instruction.'''))
 
 def main():
 	args={}
@@ -419,7 +419,7 @@ def main():
 			'OUTPUT-POLICY':'ACCEPT',
 			'FORWARD-POLICY':'ACCEPT',
 			'logpath':'/var/log/threatwall/',
-			'gitrepo':'https://github.com/hackers-terabit/threatwall',
+			'gitrepo':'https://github.com/MainframeSkuzzy/threatwall',
 			'localclone':'/etc/threatwall/synced',
 			'tmpath':'/tmp',
 			'target':'DROP', #be sure to never set this to 'THREATWALL' as it would be sending rules to itself
