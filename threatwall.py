@@ -203,18 +203,22 @@ class IoC_Block:
 					if domain.lower() in e.lower():
 						skip_out=True
 						break	
+				hexdomain=''
+				for l in domain.split("."):
+					hexdomain+=format(len(l),'x').zfill(2)+l.encode('hex')
+				hexdomain='"'+hexdomain[:128]+'"'	
 				if not skip_whitelist:			
 					if skip_in:
 						logging.debug("Skipping input block of "+domain+" as a result of an exisiting block")
 					else:
-						blocklist.add(' '.join(["-A","INPUT","-p","tcp","--sport","53","-m","string","--algo","bm","--string",domain,"-j","THREATWALL","-m","comment","--comment",'"Placed by threatwall for inbound TCP DNS IoC"']))
-						blocklist.add(' '.join(["-A","INPUT","-p","udp","--sport","53","-m","string","--algo","bm","--string",domain,"-j","THREATWALL","-m","comment","--comment",'"Placed by threatwall for inbound UDP DNS IoC"']))
+						blocklist.add(' '.join(["-A","INPUT","-p","tcp","--sport","53","-m","string","--algo","bm",'--hex-string',hexdomain,"-j","THREATWALL","-m","comment","--comment",'"Placed by threatwall for inbound TCP DNS IoC. Indicator:'+domain+'"']))
+						blocklist.add(' '.join(["-A","INPUT","-p","udp","--sport","53","-m","string","--algo","bm",'--hex-string',hexdomain,"-j","THREATWALL","-m","comment","--comment",'"Placed by threatwall for inbound UDP DNS IoC. Indicator:'+domain+'"']))
 					
 					if skip_out:
 						logging.debug("Skipping output block of "+domain+" as a result of an exisiting block")
 					else:	
-						blocklist.add(' '.join(["-A","OUTPUT","-p","tcp","--dport","53","-m","string","--algo","bm","--string",domain,"-j","THREATWALL","-m","comment","--comment",'"Placed by threatwall for outbound TCP DNS IoC"']))
-						blocklist.add(' '.join(["-A","OUTPUT","-p","udp","--dport","53","-m","string","--algo","bm","--string",domain,"-j","THREATWALL","-m","comment","--comment",'"Placed by threatwall for outbound UDP DNS IoC"']))
+						blocklist.add(' '.join(["-A","OUTPUT","-p","tcp","--dport","53","-m","string","--algo","bm",'--hex-string',hexdomain,"-j","THREATWALL","-m","comment","--comment",'"Placed by threatwall for outbound TCP DNS IoC. Indicator:'+domain+'"']))
+						blocklist.add(' '.join(["-A","OUTPUT","-p","udp","--dport","53","-m","string","--algo","bm",'--hex-string',hexdomain,"-j","THREATWALL","-m","comment","--comment",'"Placed by threatwall for outbound UDP DNS IoC. Indicator:'+domain+'"']))
 				else:
 					print("Skipping "+domain+" due to a whitelist entry.")		
 					logging.info("Skipping "+domain+" due to a whitelist entry.")
