@@ -298,6 +298,8 @@ http://191.101.31.126/sp.php
 http://191.101.31.126/test_servers.xml
 http://191.252.131.156/~fajri/e-pay/
 http://192.111.144.114:9001
+http://192.166.218.230:3550/logo.doc
+http://192.166.218.230:3550/ratman.exe
 http://192.169.82.86/~gurgenle/verify/webmail/
 http://192.169.82.86/~loftyco/okilo/login.php
 http://192.169.82.86/~loftyco/skool/login.php
@@ -500,6 +502,7 @@ http://5.104.105.194/adminxx5xx/i/
 http://5.104.105.194/adminxx5xx/i/p.php
 http://5.104.105.194/adminxx5xx/i/recv.php
 http://5.104.105.194/adminxx5xx/i/s.php?seed=
+http://5.134.116.146:3550
 http://5.135.35.119/
 http://5.153.58.45/normal.dotm
 http://5.153.58.45/Normal.dotm
